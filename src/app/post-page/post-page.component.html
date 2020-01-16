@@ -1,19 +1,22 @@
-<div class="post">
-  <div class="header">
-    <h1>Post title</h1>
+<div *ngIf="post$ | async as post; else loading">
+  <div class="post">
+    <div class="header">
+      <h1>{{ post.title }}</h1>
 
-    <button routerLink="/" class="btn btn-link">На главную</button>
-  </div>
+      <button routerLink="/" class="btn btn-link">На главную</button>
+    </div>
 
-  <div class="info">
-    <strong>Тут автор</strong>
-    <small>12.09.2019</small>
-  </div>
+    <div class="info">
+      <strong>{{ post.author }}</strong>
+      <small>{{ post.date | date:'medium':null:'ru'}}</small>
+    </div>
 
-  <div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium asperiores consequatur deserunt eaque eius esse et eveniet explicabo facere fuga fugit illo laboriosam magni maxime minus mollitia nam natus neque nesciunt, nihil nobis quaerat quas quisquam ratione recusandae tempora unde vitae voluptas voluptatibus voluptatum? Eius fugit nesciunt repellat vel voluptatum?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium asperiores consequatur deserunt eaque eius esse et eveniet explicabo facere fuga fugit illo laboriosam magni maxime minus mollitia nam natus neque nesciunt, nihil nobis quaerat quas quisquam ratione recusandae tempora unde vitae voluptas voluptatibus voluptatum? Eius fugit nesciunt repellat vel voluptatum?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium asperiores consequatur deserunt eaque eius esse et eveniet explicabo facere fuga fugit illo laboriosam magni maxime minus mollitia nam natus neque nesciunt, nihil nobis quaerat quas quisquam ratione recusandae tempora unde vitae voluptas voluptatibus voluptatum? Eius fugit nesciunt repellat vel voluptatum?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium asperiores consequatur deserunt eaque eius esse et eveniet explicabo facere fuga fugit illo laboriosam magni maxime minus mollitia nam natus neque nesciunt, nihil nobis quaerat quas quisquam ratione recusandae tempora unde vitae voluptas voluptatibus voluptatum? Eius fugit nesciunt repellat vel voluptatum?</p>
+    <div>
+      <quill-view-html [content]="post.text"></quill-view-html>
+    </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <p class="text-center">Загружаю пост...</p>
+</ng-template>
