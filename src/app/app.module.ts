@@ -1,4 +1,6 @@
+import {ServiceWorkerModule} from '@angular/service-worker';
 import {BrowserModule} from '@angular/platform-browser';
+import {environment} from '../environments/environment';
 import {NgModule, Provider} from '@angular/core';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {registerLocaleData} from '@angular/common';
@@ -33,7 +35,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
